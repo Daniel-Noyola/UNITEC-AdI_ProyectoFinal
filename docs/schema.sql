@@ -87,3 +87,7 @@ CREATE TABLE IF NOT EXISTS `detalle_pedido` (
   FOREIGN KEY (`id_platillo`) REFERENCES `platillos` (`id_platillo`)
     ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+-- Administrador inicial (correo: admin@foodmanager.com | contraseña: Admin123)
+INSERT IGNORE INTO `usuarios` (`nombre`, `correo`, `contrasena_hash`, `telefono`, `rol`) VALUES
+('Administrador', 'admin@foodmanager.com', '$2y$12$HbuCUvWrt0P4Le8G36BcO.L2J9fdLw4k1pq/bKIfQRRsda4jA7Eie', NULL, 'admin');
