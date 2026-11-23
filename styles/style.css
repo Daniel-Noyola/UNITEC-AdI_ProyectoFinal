@@ -1,0 +1,1820 @@
+/* ==========================================================================
+   Food Manager - Estilos Principales
+   Paleta: Azul Oscuro, Naranja y Blanco
+   ========================================================================== */
+
+:root {
+  --color-primary: #0F172A;
+  --color-primary-light: #1E293B;
+  --color-primary-hover: #334155;
+  --color-accent: #F97316;
+  --color-accent-hover: #EA580C;
+  --color-accent-soft: rgba(249, 115, 22, 0.12);
+  --color-bg: #F8FAFC;
+  --color-card-bg: #FFFFFF;
+  --color-text: #1E293B;
+  --color-text-muted: #64748B;
+  --color-border: #E2E8F0;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-info: #0284C7;
+  --font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.03);
+  --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.07), 0 2px 4px -1px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 18px 35px -8px rgba(15, 23, 42, 0.14), 0 6px 12px -4px rgba(15, 23, 42, 0.06);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Layout Principal con Flexbox
+   ========================================================================== */
+.app-layout {
+  display: flex;
+  height: 100vh;
+  height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.app-layout__sidebar {
+  width: 260px;
+  height: 100%;
+  background-color: var(--color-primary);
+  color: #F8FAFC;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+  z-index: 100;
+}
+
+.app-layout__main {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-y: auto;
+  background-color: var(--color-bg);
+}
+
+.app-layout__content {
+  flex: 1;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ==========================================================================
+   Barra Lateral (Sidebar BEM)
+   ========================================================================== */
+.sidebar__header {
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar__logo-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--color-accent), #FB923C);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #FFFFFF;
+}
+
+.sidebar__brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+}
+
+.sidebar__brand span {
+  color: var(--color-accent);
+}
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem 0.75rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sidebar__section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748B;
+  padding: 0.75rem 1rem 0.25rem;
+}
+
+.sidebar__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-sm);
+  color: #94A3B8;
+  font-weight: 500;
+  font-size: 0.92rem;
+  transition: all 0.2s ease;
+}
+
+.sidebar__link:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #FFFFFF;
+}
+
+.sidebar__link--active {
+  background-color: rgba(249, 115, 22, 0.14);
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.sidebar__link--active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  border-radius: 0 4px 4px 0;
+  background-color: var(--color-accent);
+}
+
+.sidebar__link--active .sidebar__link-icon {
+  color: var(--color-accent);
+}
+
+.sidebar__link--active:hover {
+  background-color: rgba(249, 115, 22, 0.2);
+}
+
+.sidebar__link-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar__footer {
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sidebar__user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sidebar__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--color-primary-hover);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.sidebar__user-details {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar__user-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar__user-role {
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   Barra Superior (Topbar BEM)
+   ========================================================================== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: rgba(248, 250, 252, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.9rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.topbar__left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.topbar__heading {
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar__eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.topbar__toggle-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.topbar__title {
+  font-size: 1.3rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  color: var(--color-primary);
+  line-height: 1.25;
+}
+
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ==========================================================================
+   Tarjetas y Contenedores (Card BEM)
+   ========================================================================== */
+.card {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card__header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.card__body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card__footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--color-border);
+  background-color: #FAFAFA;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* ==========================================================================
+   KPI Grid con Flexbox
+   ========================================================================== */
+.kpi-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.kpi-card {
+  flex: 1 1 calc(20% - 1.25rem);
+  min-width: 200px;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.kpi-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.kpi-card__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.kpi-card__value {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.kpi-card__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kpi-card__subtext {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   Platillos: Grid y Tarjeta con Soporte de Placeholder SVG
+   ========================================================================== */
+.dish-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.dish-card {
+  flex: 1 1 calc(33.333% - 1.5rem);
+  min-width: 280px;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dish-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.dish-card__image-container {
+  width: 100%;
+  height: 190px;
+  background-color: #F1F5F9;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dish-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.dish-card:hover .dish-card__img {
+  transform: scale(1.05);
+}
+
+/* Icono de respaldo elegante cuando no hay imagen física */
+.dish-card__image-container--placeholder {
+  background: linear-gradient(145deg, #F8FAFC, #E2E8F0);
+  padding: 1rem;
+}
+
+.dish-card__placeholder-icon {
+  width: 68px;
+  height: 68px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06));
+}
+
+.dish-card__placeholder-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.dish-card__body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5rem;
+}
+
+.dish-card__header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.dish-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.dish-card__price {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.dish-card__desc {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  flex: 1;
+}
+
+.dish-card__footer {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FAFAFA;
+}
+
+/* ==========================================================================
+   Mesas: Grid y Tarjetas de Estado
+   ========================================================================== */
+.table-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.table-card {
+  flex: 1 1 calc(25% - 1.25rem);
+  min-width: 220px;
+  background-color: var(--color-card-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.table-card--disponible {
+  border-color: #A7F3D0;
+  background-color: #ECFDF5;
+}
+
+.table-card--ocupada {
+  border-color: #FED7AA;
+  background-color: #FFF7ED;
+}
+
+.table-card--inactiva {
+  border-color: #E2E8F0;
+  background-color: #F1F5F9;
+  opacity: 0.75;
+}
+
+.table-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-card__number {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.table-card__capacity {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* ==========================================================================
+   Tablas de Datos
+   ========================================================================== */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.data-table th {
+  background-color: #F8FAFC;
+  font-weight: 700;
+  color: var(--color-primary-light);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+.data-table tbody tr:hover {
+  background-color: #F1F5F9;
+}
+
+/* ==========================================================================
+   Badges y Etiquetas
+   ========================================================================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.badge--success {
+  background-color: #DCFCE7;
+  color: #15803D;
+}
+
+.badge--warning {
+  background-color: #FEF3C7;
+  color: #B45309;
+}
+
+.badge--danger {
+  background-color: #FEE2E2;
+  color: #B91C1C;
+}
+
+.badge--info {
+  background-color: #E0F2FE;
+  color: #0369A1;
+}
+
+.badge--neutral {
+  background-color: #F1F5F9;
+  color: #475569;
+}
+
+/* ==========================================================================
+   Botones (Btn BEM)
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.btn--primary:hover {
+  background-color: var(--color-primary-light);
+}
+
+.btn--accent {
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+}
+
+.btn--accent:hover {
+  background-color: var(--color-accent-hover);
+}
+
+.btn--danger {
+  background-color: var(--color-danger);
+  color: #FFFFFF;
+}
+
+.btn--danger:hover {
+  background-color: #DC2626;
+}
+
+.btn--outline {
+  background-color: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.btn--outline:hover {
+  background-color: #F1F5F9;
+}
+
+.btn--sm {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* ==========================================================================
+   Formularios Flexbox
+   ========================================================================== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.form-control {
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-soft);
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-row>.form-group {
+  flex: 1 1 calc(50% - 1rem);
+  min-width: 200px;
+}
+
+/* ==========================================================================
+   Alertas y Mensajes Flash
+   ========================================================================== */
+.alert {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-weight: 500;
+  font-size: 0.92rem;
+}
+
+.alert--success {
+  background-color: #DEF7EC;
+  color: #03543F;
+  border-left: 4px solid var(--color-success);
+}
+
+.alert--danger {
+  background-color: #FDE8E8;
+  color: #9B1C1C;
+  border-left: 4px solid var(--color-danger);
+}
+
+.alert__close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.7;
+}
+
+.alert__close:hover {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Estado Vacío (Empty State)
+   ========================================================================== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  gap: 1rem;
+}
+
+.empty-state__icon {
+  font-size: 3rem;
+  color: var(--color-text-muted);
+}
+
+.empty-state__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.empty-state__desc {
+  color: var(--color-text-muted);
+  max-width: 420px;
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   Carrito Lateral Flotante para Pedidos (Flexbox)
+   ========================================================================== */
+.order-builder {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.order-builder__menu {
+  flex: 1;
+  min-width: 0;
+}
+
+.order-builder__cart {
+  width: 340px;
+  position: sticky;
+  top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-border);
+  gap: 0.5rem;
+}
+
+.cart-item__title {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.cart-item__price {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.cart-item__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cart-item__qty-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.cart-item__qty-btn:hover {
+  background-color: #F1F5F9;
+}
+
+/* ==========================================================================
+   Ventana Modal Accesible (Flexbox)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(2px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.modal-overlay--open {
+  display: flex;
+}
+
+.modal {
+  background-color: #FFFFFF;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  max-width: 580px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: modalIn 0.2s ease-out;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal__header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.modal__close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--color-text-muted);
+}
+
+.modal__body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ==========================================================================
+   Diseño Responsive (Tablet & Móvil)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .kpi-card {
+    flex: 1 1 calc(33.333% - 1.25rem);
+  }
+
+  .order-builder {
+    flex-direction: column;
+  }
+
+  .order-builder__cart {
+    width: 100%;
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-layout__sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+  }
+
+  .app-layout__sidebar--open {
+    transform: translateX(0);
+  }
+
+  .topbar__toggle-btn {
+    display: inline-block;
+  }
+
+  .kpi-card {
+    flex: 1 1 100%;
+  }
+
+  .dish-card {
+    flex: 1 1 100%;
+  }
+
+  .table-card {
+    flex: 1 1 100%;
+  }
+
+  .app-layout__content {
+    padding: 1rem;
+  }
+}
+
+/* ==========================================================================
+   Vistas de Autenticación y Utilidades BEM Adicionales
+   ========================================================================== */
+.auth-layout {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+}
+
+.auth-card {
+  max-width: 440px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+}
+
+.auth-card__header {
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.auth-card__logo {
+  width: 48px;
+  height: 48px;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.auth-card__subtitle {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.auth-card__switch {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+.auth-card__link {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.sidebar__footer-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.sidebar__seeder-form,
+.sidebar__footer-actions>.sidebar__logout-btn {
+  flex: 1;
+  display: flex;
+}
+
+.sidebar__seeder-form .btn,
+.sidebar__footer-actions>.sidebar__logout-btn {
+  width: 100%;
+  justify-content: center;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 0.78rem;
+}
+
+.sidebar__logout-btn {
+  color: #F8FAFC;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.topbar__email {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   Detalle Destacado de Pedido (orders.php)
+   ========================================================================== */
+.order-detail-card {
+  border: 2px solid var(--color-accent);
+  border-left-width: 6px;
+  box-shadow: var(--shadow-lg);
+}
+
+.order-detail-card__header {
+  background: linear-gradient(90deg, var(--color-accent-soft), rgba(255, 255, 255, 0) 65%);
+}
+
+.order-detail-card__eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-accent-hover);
+  margin-bottom: 0.2rem;
+}
+
+.order-detail-card__title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.order-row--selected {
+  background-color: var(--color-accent-soft);
+}
+
+.order-detail-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+.order-detail-summary__item {
+  flex: 1 1 180px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.order-detail-summary__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+.order-detail-summary__value {
+  font-size: 0.95rem;
+  color: var(--color-primary);
+}
+
+.order-detail-summary__item--total {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  border-color: var(--color-primary);
+}
+
+.order-detail-summary__item--total .order-detail-summary__label {
+  color: #CBD5E1;
+}
+
+.order-detail-summary__total {
+  font-size: 1.45rem;
+  line-height: 1.2;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.order-detail-total-row td {
+  background-color: var(--color-accent-soft);
+  border-top: 2px solid var(--color-accent);
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+  font-size: 1rem;
+  color: var(--color-primary);
+}
+
+.order-detail-total-row__amount {
+  font-size: 1.2rem;
+  color: var(--color-accent-hover);
+  font-variant-numeric: tabular-nums;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.dish-thumb {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.cart-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 2px solid var(--color-border);
+  margin-top: 0.5rem;
+}
+
+.cart-summary__label {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.cart-summary__total {
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--color-accent);
+}
+
+
+/* ==========================================================================
+   Rediseño Editorial & Bento (Componentes Refinados)
+   ========================================================================== */
+.ui-icon {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.btn--lg {
+  padding: 0.85rem 1.35rem;
+  font-size: 0.98rem;
+}
+
+.badge--accent {
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent-hover);
+}
+
+.card__subtitle {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 0.15rem;
+}
+
+.num-cell {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Toolbar de Página */
+.page-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.page-toolbar__title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-primary);
+}
+
+.page-toolbar__subtitle {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+}
+
+.page-toolbar__filters {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.inline-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.inline-field__label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+.form-control--sm {
+  padding: 0.42rem 0.65rem;
+  font-size: 0.85rem;
+}
+
+/* Dashboard Bento KPIs */
+.kpi-bento {
+  display: grid;
+  grid-template-columns: 1.15fr 2fr;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.kpi-bento__secondary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.kpi-card--hero {
+  background: radial-gradient(circle at top right, rgba(249, 115, 22, 0.22), transparent 55%),
+    linear-gradient(145deg, #0F172A 0%, #1E293B 100%);
+  border-color: #1E293B;
+  color: #FFFFFF;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 1.6rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.kpi-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.kpi-card__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94A3B8;
+}
+
+.kpi-card__icon--hero {
+  background-color: rgba(249, 115, 22, 0.18);
+  color: var(--color-accent);
+  border: 1px solid rgba(249, 115, 22, 0.35);
+}
+
+.kpi-card__value--hero {
+  font-size: 2.35rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  font-variant-numeric: tabular-nums;
+  margin: 0.75rem 0;
+}
+
+.kpi-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.kpi-card__pill {
+  background-color: rgba(16, 185, 129, 0.16);
+  color: #34D399;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+}
+
+.kpi-card--hero .kpi-card__subtext {
+  color: #CBD5E1;
+}
+
+/* Dashboard Split Inferior */
+.dashboard-split {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.quick-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.quick-action-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg);
+  transition: all 0.2s ease;
+}
+
+.quick-action-item:hover {
+  border-color: var(--color-accent);
+  background-color: #FFFFFF;
+  transform: translateX(3px);
+  box-shadow: var(--shadow-sm);
+}
+
+.quick-action-item__icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.quick-action-item__text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.quick-action-item__text strong {
+  font-size: 0.9rem;
+  color: var(--color-primary);
+}
+
+.quick-action-item__text span {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.quick-action-item__arrow {
+  color: var(--color-text-muted);
+  transition: color 0.2s ease;
+}
+
+.quick-action-item:hover .quick-action-item__arrow {
+  color: var(--color-accent);
+}
+
+/* Pestañas Segmentadas */
+.segmented-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.35rem;
+  background-color: #E2E8F0;
+  border-radius: var(--radius-md);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.segmented-tabs__item {
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: all 0.2s ease;
+}
+
+.segmented-tabs__item:hover {
+  color: var(--color-primary);
+}
+
+.segmented-tabs__item--active {
+  background-color: #FFFFFF;
+  color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Menú: Tarjeta de Platillo y Comanda */
+.dish-card__media {
+  position: relative;
+}
+
+.dish-card__category-pill {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background-color: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(4px);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+}
+
+.order-ticket {
+  border-top: 4px solid var(--color-accent);
+}
+
+.order-ticket__title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.order-ticket__icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Stepper de Estado de Pedido */
+.order-stepper {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.order-stepper__step {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--color-text-muted);
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.order-stepper__dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #E2E8F0;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.order-stepper__step--done .order-stepper__dot {
+  background-color: var(--color-success);
+  color: #FFFFFF;
+}
+
+.order-stepper__step--done {
+  color: var(--color-primary);
+}
+
+.order-stepper__step--active .order-stepper__dot {
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+  box-shadow: 0 0 0 4px var(--color-accent-soft);
+}
+
+.order-stepper__step--active {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* Inventario: Barra de Nivel de Stock */
+.stock-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 120px;
+}
+
+.stock-meter {
+  width: 100%;
+  height: 6px;
+  background-color: #E2E8F0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.stock-meter__fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.stock-meter__fill--success {
+  background-color: var(--color-success);
+}
+
+.stock-meter__fill--warning {
+  background-color: var(--color-warning);
+}
+
+.stock-meter__fill--danger {
+  background-color: var(--color-danger);
+}
+
+/* Mesas: Refinamiento */
+.table-card {
+  border-top: 4px solid var(--color-border);
+}
+
+.table-card--disponible {
+  border-top-color: var(--color-success);
+}
+
+.table-card--ocupada {
+  border-top-color: var(--color-warning);
+}
+
+.table-card--inactiva {
+  border-top-color: #94A3B8;
+}
+
+.table-card__capacity {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+/* Auth Split Screen */
+.auth-split {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+}
+
+.auth-split__showcase {
+  background: radial-gradient(circle at top right, rgba(249, 115, 22, 0.22), transparent 52%),
+    linear-gradient(155deg, #0F172A 0%, #1E293B 100%);
+  color: #F8FAFC;
+  padding: 2.75rem 3.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2.5rem;
+}
+
+.auth-showcase__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.auth-showcase__tag {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background-color: rgba(249, 115, 22, 0.18);
+  color: #FDBA74;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+.auth-showcase__title {
+  font-size: 2.15rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  margin-bottom: 1rem;
+}
+
+.auth-showcase__desc {
+  color: #CBD5E1;
+  font-size: 0.98rem;
+  max-width: 460px;
+  margin-bottom: 2rem;
+}
+
+.auth-showcase__features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.auth-showcase__features li {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.auth-showcase__feat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.auth-showcase__features strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #FFFFFF;
+}
+
+.auth-showcase__features span {
+  font-size: 0.82rem;
+  color: #94A3B8;
+}
+
+.auth-showcase__footer {
+  font-size: 0.8rem;
+  color: #64748B;
+}
+
+.auth-split__form-area {
+  background-color: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+}
+
+.auth-split__form-area .auth-card {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: var(--shadow-md);
+}
+
+.auth-card__title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-primary);
+  margin-bottom: 0.35rem;
+}
+
+.auth-card__body {
+  margin-top: 1.5rem;
+}
+
+/* Responsive Adicional para Bento y Split */
+@media (max-width: 1120px) {
+
+  .kpi-bento,
+  .dashboard-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .auth-split {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-split__showcase {
+    padding: 2rem 1.5rem;
+  }
+
+  .auth-showcase__features {
+    display: none;
+  }
+
+  .auth-showcase__title {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .kpi-bento__secondary {
+    grid-template-columns: 1fr;
+  }
+
+  .order-stepper {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
