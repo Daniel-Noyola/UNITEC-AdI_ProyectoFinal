@@ -66,37 +66,45 @@ renderHeader('Dashboard de Administración', 'dashboard');
   </div>
 
   <div class="kpi-bento__secondary">
-    <div class="kpi-card">
-      <div class="kpi-card__icon"><?= renderIcon('star') ?></div>
-      <div class="kpi-card__content">
+    <div class="kpi-card kpi-card--metric kpi-card--accent">
+      <div class="kpi-card__header">
         <span class="kpi-card__label">Producto Más Vendido</span>
+        <div class="kpi-card__icon"><?= renderIcon('star') ?></div>
+      </div>
+      <div class="kpi-card__content">
         <span class="kpi-card__value"><?= e($kpis['platillo_top']['nombre'] ?? 'N/D') ?></span>
         <span class="kpi-card__subtext"><?= (int)($kpis['platillo_top']['total_unidades'] ?? 0) ?> unidades vendidas</span>
       </div>
     </div>
 
-    <div class="kpi-card">
-      <div class="kpi-card__icon"><?= renderIcon('user') ?></div>
-      <div class="kpi-card__content">
+    <div class="kpi-card kpi-card--metric kpi-card--info">
+      <div class="kpi-card__header">
         <span class="kpi-card__label">Cliente Frecuente</span>
+        <div class="kpi-card__icon"><?= renderIcon('user') ?></div>
+      </div>
+      <div class="kpi-card__content">
         <span class="kpi-card__value"><?= e($kpis['cliente_top']['nombre'] ?? 'N/D') ?></span>
         <span class="kpi-card__subtext"><?= (int)($kpis['cliente_top']['total_pedidos'] ?? 0) ?> pedidos ($<?= number_format((float)($kpis['cliente_top']['total_gastado'] ?? 0), 2) ?>)</span>
       </div>
     </div>
 
-    <div class="kpi-card">
-      <div class="kpi-card__icon"><?= renderIcon('calendar') ?></div>
-      <div class="kpi-card__content">
+    <div class="kpi-card kpi-card--metric kpi-card--success">
+      <div class="kpi-card__header">
         <span class="kpi-card__label">Día con Más Ventas</span>
+        <div class="kpi-card__icon"><?= renderIcon('calendar') ?></div>
+      </div>
+      <div class="kpi-card__content">
         <span class="kpi-card__value"><?= e($kpis['periodo_top']['fecha_dia'] ?? 'N/D') ?></span>
         <span class="kpi-card__subtext">Ingreso: $<?= number_format((float)($kpis['periodo_top']['total_dia'] ?? 0), 2) ?></span>
       </div>
     </div>
 
-    <div class="kpi-card">
-      <div class="kpi-card__icon"><?= renderIcon('receipt') ?></div>
-      <div class="kpi-card__content">
+    <div class="kpi-card kpi-card--metric kpi-card--neutral">
+      <div class="kpi-card__header">
         <span class="kpi-card__label">Ticket Promedio</span>
+        <div class="kpi-card__icon"><?= renderIcon('receipt') ?></div>
+      </div>
+      <div class="kpi-card__content">
         <span class="kpi-card__value">$<?= number_format($kpis['ticket_promedio'], 2) ?></span>
         <span class="kpi-card__subtext">Base de <?= $kpis['pedidos_totales'] ?> cuentas cerradas</span>
       </div>
@@ -165,7 +173,7 @@ renderHeader('Dashboard de Administración', 'dashboard');
     </div>
     <div class="card__body">
       <div class="quick-actions">
-        <a href="../menu/menu.php" class="quick-action-item">
+        <a href="../menu/menu.php" class="quick-action-item quick-action-item--primary">
           <span class="quick-action-item__icon"><?= renderIcon('menu') ?></span>
           <div class="quick-action-item__text">
             <strong>Nueva Comanda</strong>

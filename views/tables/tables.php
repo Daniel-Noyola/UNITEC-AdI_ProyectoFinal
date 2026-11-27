@@ -57,7 +57,10 @@ renderHeader('Gestión de Mesas', 'tables');
       <?php foreach ($tables as $table): ?>
         <div class="table-card table-card--<?= e($table['estado']) ?>">
           <div class="table-card__header">
-            <span class="table-card__number">Mesa <?= (int)$table['numero_mesa'] ?></span>
+            <div class="table-card__identity">
+              <span class="table-card__num-pill"><?= str_pad((string)(int)$table['numero_mesa'], 2, '0', STR_PAD_LEFT) ?></span>
+              <span class="table-card__number">Mesa <?= (int)$table['numero_mesa'] ?></span>
+            </div>
             <span class="badge <?= getStatusBadgeClass($table['estado']) ?>">
               <?= e($table['estado']) ?>
             </span>
@@ -66,7 +69,7 @@ renderHeader('Gestión de Mesas', 'tables');
             <?= renderIcon('users') ?>
             <span>Capacidad: <strong><?= (int)$table['capacidad'] ?></strong> comensales</span>
           </div>
-          <form action="tables.php" method="POST">
+          <form action="tables.php" method="POST" class="table-card__actions">
             <input type="hidden" name="action" value="toggle_table">
             <input type="hidden" name="id_mesa" value="<?= (int)$table['id_mesa'] ?>">
             <button type="submit" class="btn btn--outline btn--sm btn--block">

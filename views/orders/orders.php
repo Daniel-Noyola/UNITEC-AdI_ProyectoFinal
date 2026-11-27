@@ -179,39 +179,54 @@ renderHeader('Historial y Seguimiento de Pedidos', 'orders');
       </div>
     <?php else: ?>
       <div class="table-responsive">
-        <table class="data-table">
+        <table class="data-table data-table--orders">
           <thead>
             <tr>
-              <th># Pedido</th>
-              <?php if ($isAdminUser): ?>
-                <th>Cliente</th>
-              <?php endif; ?>
-              <th>Mesa</th>
-              <th>Fecha de Solicitud</th>
-              <th>Estado Actual</th>
-              <th>Total</th>
-              <th>Acciones</th>
+              <th>Folio</th>
+              <th><?= $isAdminUser ? 'Cliente y Fecha' : 'Fecha de Solicitud' ?></th>
+              <th>Modalidad</th>
+              <th>Estado</th>
+              <th class="num-cell">Total</th>
+              <th class="num-cell">Acciones</th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($ordersList as $ord): ?>
-              <?php $isRowSelected = $canViewDetail && (int)$ord['id_pedido'] === (int)$activeOrder['id_pedido']; ?>
-              <tr class="<?= $isRowSelected ? 'order-row--selected' : '' ?>">
-                <td><strong>#<?= (int)$ord['id_pedido'] ?></strong></td>
-                <?php if ($isAdminUser): ?>
-                  <td><?= e($ord['usuario_nombre']) ?></td>
-                <?php endif; ?>
-                <td><?= $ord['numero_mesa'] ? 'Mesa ' . (int)$ord['numero_mesa'] : 'Para Llevar' ?></td>
-                <td><?= e($ord['fecha_pedido']) ?></td>
-                <td><span class="badge <?= getStatusBadgeClass($ord['estado']) ?>"><?= e($ord['estado']) ?></span></td>
-                <td><strong>$<?= number_format((float)$ord['total'], 2) ?></strong></td>
+              <?php
+                $isRowSelected = $canViewDetail && (int)$ord['id_pedido'] === (int)$activeOrder['id_pedido'];
+                $isClosedOrder = in_array($ord['estado'], ['pagado', 'cancelado'], true);
+                $detailUrl = 'orders.php?order_id=' . (int)$ord['id_pedido'] . ($statusFilter ? '&estado=' . urlencode($statusFilter) : '');
+                $formattedDate = date('d/m/Y · H:i', strtotime($ord['fecha_pedido']));
+              ?>
+              <tr class="<?= $isRowSelected ? 'order-row--selected' : '' ?> <?= $isClosedOrder ? 'order-row--closed' : '' ?>">
                 <td>
-                  <div class="filter-bar">
-                    <?php
-                      $detailUrl = 'orders.php?order_id=' . (int)$ord['id_pedido'] . ($statusFilter ? '&estado=' . urlencode($statusFilter) : '');
-                    ?>
+                  <a href="<?= e($detailUrl) ?>" class="folio-pill" title="Ver detalle del pedido #<?= (int)$ord['id_pedido'] ?>">
+                    #<?= (int)$ord['id_pedido'] ?>
+                  </a>
+                </td>
+                <td>
+                  <div class="cell-stack">
+                    <?php if ($isAdminUser): ?>
+                      <span class="cell-stack__main"><?= e($ord['usuario_nombre']) ?></span>
+                      <span class="cell-stack__sub"><?= e($formattedDate) ?></span>
+                    <?php else: ?>
+                      <span class="cell-stack__main"><?= e($formattedDate) ?></span>
+                    <?php endif; ?>
+                  </div>
+                </td>
+                <td>
+                  <?php if ($ord['numero_mesa']): ?>
+                    <span class="place-pill place-pill--table">Mesa <?= str_pad((string)(int)$ord['numero_mesa'], 2, '0', STR_PAD_LEFT) ?></span>
+                  <?php else: ?>
+                    <span class="place-pill place-pill--takeout">Para Llevar</span>
+                  <?php endif; ?>
+                </td>
+                <td><span class="badge <?= getStatusBadgeClass($ord['estado']) ?>"><?= e($ord['estado']) ?></span></td>
+                <td class="num-cell"><strong>$<?= number_format((float)$ord['total'], 2) ?></strong></td>
+                <td>
+                  <div class="actions-clean">
                     <a href="<?= e($detailUrl) ?>" class="btn <?= $isRowSelected ? 'btn--accent' : 'btn--outline' ?> btn--sm">
-                      <?= $isRowSelected ? 'Viendo Detalle' : 'Ver Detalle' ?>
+                      <?= $isRowSelected ? 'Viendo' : 'Detalle' ?>
                     </a>
 
                     <?php if ($isAdminUser): ?>
@@ -233,14 +248,14 @@ renderHeader('Historial y Seguimiento de Pedidos', 'orders');
                         <form action="orders.php" method="POST" data-confirm="¿Cancelar este pedido? Los ingredientes serán devueltos al almacén.">
                           <input type="hidden" name="id_pedido" value="<?= (int)$ord['id_pedido'] ?>">
                           <input type="hidden" name="nuevo_estado" value="cancelado">
-                          <button type="submit" class="btn btn--danger btn--sm"><?= renderIcon('close') ?><span>Cancelar</span></button>
+                          <button type="submit" class="btn-icon-danger" title="Cancelar pedido" aria-label="Cancelar pedido #<?= (int)$ord['id_pedido'] ?>">&times;</button>
                         </form>
                       <?php endif; ?>
                     <?php elseif ($ord['estado'] === 'pendiente'): ?>
                       <form action="orders.php" method="POST" data-confirm="¿Seguro que deseas cancelar tu pedido?">
                         <input type="hidden" name="id_pedido" value="<?= (int)$ord['id_pedido'] ?>">
                         <input type="hidden" name="nuevo_estado" value="cancelado">
-                        <button type="submit" class="btn btn--danger btn--sm"><?= renderIcon('close') ?><span>Cancelar</span></button>
+                        <button type="submit" class="btn-icon-danger" title="Cancelar pedido" aria-label="Cancelar pedido #<?= (int)$ord['id_pedido'] ?>">&times;</button>
                       </form>
                     <?php elseif ($ord['estado'] === 'entregado'): ?>
                       <form action="orders.php" method="POST" data-confirm="¿Confirmar el pago del pedido #<?= (int)$ord['id_pedido'] ?> por $<?= number_format((float)$ord['total'], 2) ?>?">
